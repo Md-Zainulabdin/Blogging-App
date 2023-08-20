@@ -7,3 +7,12 @@
   --primary-black: #343A40;
 }
 
+::placeholder {
+  font-weight: 400;
+}
+
+.customflex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

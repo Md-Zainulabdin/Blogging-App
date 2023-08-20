@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const GuestLayout = () => {
-  return (
-    <div>GuestLayout</div>
-  )
-}
+const GuestLayout = ({ children }) => {
+  return <>{children}</>;
+};
 
-export default GuestLayout
+export default GuestLayout;
