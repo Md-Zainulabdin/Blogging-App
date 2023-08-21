@@ -4,29 +4,41 @@ import { validate } from "@/app/lib/validate";
 import React, { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 
-const Form = ({ signIn }) => {
+const Form = ({ signIn, onFormSubmit }) => {
   let firstNameRef = useRef("");
   let lastNameRef = useRef("");
   let passwordRef = useRef("");
   let confirmPasswordRef = useRef("");
   let emailRef = useRef("");
 
+  const errorMessage = (err) => {
+    toast.error(err, { autoClose: 3000, position: "top-center" });
+  };
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        const firstname = firstNameRef.current.value;
-        const lastname = lastNameRef.current.value;
-        const confirmPassword = confirmPasswordRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const firstname = firstNameRef.current.value;
+    const lastname = lastNameRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
 
-        
-  }
+    const error = validate(firstname, password, confirmPassword);
+    if (error) {
+      errorMessage(error);
+      return
+    }
 
+    onFormSubmit(firstname, lastname, email, password);
+  };
 
   return (
     <div className="w-[73%] sm:w-[63%] md:w-[53%] lg:w-[43%] xl:w-[33%] border p-8 shadow-sm">
-      <form action="#" className="w-full flex flex-col gap-5" onSubmit={onSubmitHandler}>
+      <form
+        action="#"
+        className="w-full flex flex-col gap-5"
+        onSubmit={onSubmitHandler}
+      >
         <div className="firstname flex flex-col">
           <input
             type="text"
@@ -53,7 +65,7 @@ const Form = ({ signIn }) => {
 
         <div className="email flex flex-col">
           <input
-            type="text"
+            type="email"
             name="email"
             ref={emailRef}
             placeholder="Email.."
@@ -85,9 +97,9 @@ const Form = ({ signIn }) => {
         </div>
 
         <div className="submit w-full flex justify-center ">
-            <button className={`${styles.button}`} type="submit">
-                Sign Up
-            </button>
+          <button className={`${styles.button}`} type="submit">
+            Sign Up
+          </button>
         </div>
       </form>
     </div>
