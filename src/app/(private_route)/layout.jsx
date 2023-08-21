@@ -1,9 +1,16 @@
+import { getServerSession } from 'next-auth'
 import React from 'react'
+import { Options } from '../api/auth/[...nextauth]/route'
+import { redirect } from 'next/navigation';
 
-const PrivateLayout = () => {
+const Privatelayout = async ({children}) => {
+
+    const session = await getServerSession(Options);
+    if (!session?.user) redirect('/auth/login')
+
   return (
-    <div>PrivateLayout</div>
+    <>{children}</>
   )
 }
 
-export default PrivateLayout
+export default Privatelayout
