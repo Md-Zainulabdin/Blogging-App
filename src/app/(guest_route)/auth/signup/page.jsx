@@ -1,17 +1,12 @@
 "use client";
 import Form from "@/app/components/Form/page";
 import Header from "@/app/components/Header/page";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { signUpMessage } from "@/app/lib/toastMessage";
 
 const SignUpPage = () => {
-
-  const {push} = useRouter();
-
-  const signUpMessage = (mess) => {
-    toast.success(mess, { autoClose: 2000, position: "top-center", closeOnClick });
-  };
+  const { push } = useRouter();
 
   const onSignUp = async (firstname, lastname, email, password) => {
     try {
@@ -28,11 +23,11 @@ const SignUpPage = () => {
         }),
       });
 
-      const resposne = await res.json();;
+      const resposne = await res.json();
       console.log(resposne);
       if (res.ok) {
         signUpMessage("Sign Up Successfully");
-        push('/auth/login')
+        push("/auth/login");
       }
     } catch (err) {
       console.log(err);

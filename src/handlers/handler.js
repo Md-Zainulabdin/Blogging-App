@@ -31,7 +31,7 @@ export const saveUsers = async ({ firstname, lastname, email, password }) => {
         throw new Error("User Already Exist!")
     }
 
-    const hashedPassword = await hash (password, 12);
+    const hashedPassword = await hash(password, 12);
 
     users.push({
         id: users.length + 1,
@@ -46,7 +46,31 @@ export const saveUsers = async ({ firstname, lastname, email, password }) => {
 
 // 5 -> verify user with password
 
-export const verifyPassword = async (hashedPassword, password ) => {
+export const verifyPassword = async (hashedPassword, password) => {
     const isFound = await compare(password, hashedPassword);
     return isFound;
+}
+
+const blogFilePath = path.join(process.cwd(), 'src', 'data', 'blog.json');
+
+// Get Blogs
+
+export const getBlogs = () => {
+    const data = JSON.parse(fs.readFileSync(blogFilePath));
+    return data;
+}
+
+// Save Blogs
+
+export const saveBlogs = ({ fullname, title, desc, date }) => {
+    const blogs = getBlogs();
+    blogs.push({
+        id: blogs.length + 1,
+        fullname,
+        title,
+        desc,
+        date,
+    });
+
+    fs.writeFileSync(blogFilePath, JSON.stringify(blogs))
 }

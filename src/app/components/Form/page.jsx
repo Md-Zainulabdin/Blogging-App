@@ -1,9 +1,9 @@
 "use client";
 import { styles } from "@/app/lib/style";
 import { validate } from "@/app/lib/validate";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
-import { toast } from "react-toastify";
+import { errorMessage } from "@/app/lib/toastMessage";
 
 const Form = ({ signIn, onFormSubmit }) => {
   let firstNameRef = useRef("");
@@ -11,10 +11,6 @@ const Form = ({ signIn, onFormSubmit }) => {
   let passwordRef = useRef("");
   let confirmPasswordRef = useRef("");
   let emailRef = useRef("");
-
-  const errorMessage = (err) => {
-    toast.error(err, { autoClose: 3000, position: "top-center" });
-  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
