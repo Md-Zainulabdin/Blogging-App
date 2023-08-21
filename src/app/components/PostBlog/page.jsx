@@ -36,7 +36,10 @@ const PostBlog = () => {
         }),
       });
 
-      console.log(res);
+      if (res.ok) {
+        titleRef.current.value = "";
+        descRef.current.value = "";
+      }
     } else {
       errorMessage("Only Authenticate User Can Post Blog");
     }
