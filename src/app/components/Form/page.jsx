@@ -1,6 +1,8 @@
 "use client";
 import { styles } from "@/app/lib/style";
-import React, { useRef } from "react";
+import { validate } from "@/app/lib/validate";
+import React, { useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 const Form = ({ signIn }) => {
   let firstNameRef = useRef("");
@@ -9,7 +11,8 @@ const Form = ({ signIn }) => {
   let confirmPasswordRef = useRef("");
   let emailRef = useRef("");
 
-  const onSubmitHandler = (e) => {
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
@@ -17,11 +20,9 @@ const Form = ({ signIn }) => {
         const lastname = lastNameRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
 
-        if (password !== confirmPassword) {
-            alert("Password Not Match")
-        }
-
+        
   }
+
 
   return (
     <div className="w-[73%] sm:w-[63%] md:w-[53%] lg:w-[43%] xl:w-[33%] border p-8 shadow-sm">
@@ -33,7 +34,8 @@ const Form = ({ signIn }) => {
             ref={firstNameRef}
             placeholder="Firstname.."
             required
-            className="p-3 border outline-none text-slate-700 rounded-sm"
+            maxLength={20}
+            className="p-3 border outline-non rounded-md"
           />
         </div>
 
@@ -44,7 +46,8 @@ const Form = ({ signIn }) => {
             ref={lastNameRef}
             placeholder="Lastname.."
             required
-            className="p-3 border outline-none text-slate-700 rounded-sm"
+            maxLength={20}
+            className="p-3 border outline-non rounded-md"
           />
         </div>
 
@@ -55,7 +58,7 @@ const Form = ({ signIn }) => {
             ref={emailRef}
             placeholder="Email.."
             required
-            className="p-3 border outline-none text-slate-700 rounded-sm"
+            className="p-3 border outline-non rounded-md"
           />
         </div>
 
@@ -66,7 +69,7 @@ const Form = ({ signIn }) => {
             ref={passwordRef}
             placeholder="Password.."
             required
-            className="p-3 border outline-none text-slate-700 rounded-sm"
+            className="p-3 border outline-non rounded-md"
           />
         </div>
 
@@ -77,7 +80,7 @@ const Form = ({ signIn }) => {
             ref={confirmPasswordRef}
             placeholder="Confirm Password.."
             required
-            className="p-3 border outline-none text-slate-700 rounded-sm"
+            className="p-3 border outline-non rounded-md"
           />
         </div>
 
