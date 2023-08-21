@@ -2,6 +2,7 @@
 import { styles } from "@/app/lib/style";
 import { validate } from "@/app/lib/validate";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { toast } from "react-toastify";
 
 const Form = ({ signIn, onFormSubmit }) => {
@@ -23,10 +24,12 @@ const Form = ({ signIn, onFormSubmit }) => {
     const lastname = lastNameRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
 
-    const error = validate(firstname, password, confirmPassword);
-    if (error) {
-      errorMessage(error);
-      return
+    if (!signIn) {
+      const error = validate(firstname, password, confirmPassword);
+      if (error) {
+        errorMessage(error);
+        return;
+      }
     }
 
     onFormSubmit(firstname, lastname, email, password);
@@ -39,29 +42,33 @@ const Form = ({ signIn, onFormSubmit }) => {
         className="w-full flex flex-col gap-5"
         onSubmit={onSubmitHandler}
       >
-        <div className="firstname flex flex-col">
-          <input
-            type="text"
-            name="firstname"
-            ref={firstNameRef}
-            placeholder="Firstname.."
-            required
-            maxLength={20}
-            className="p-3 border outline-non rounded-md"
-          />
-        </div>
+        {!signIn ? (
+          <>
+            <div className="firstname flex flex-col">
+              <input
+                type="text"
+                name="firstname"
+                ref={firstNameRef}
+                placeholder="Firstname.."
+                required
+                maxLength={20}
+                className="p-3 border outline-none rounded-md"
+              />
+            </div>
 
-        <div className="lastname flex flex-col">
-          <input
-            type="text"
-            name="lastname"
-            ref={lastNameRef}
-            placeholder="Lastname.."
-            required
-            maxLength={20}
-            className="p-3 border outline-non rounded-md"
-          />
-        </div>
+            <div className="lastname flex flex-col">
+              <input
+                type="text"
+                name="lastname"
+                ref={lastNameRef}
+                placeholder="Lastname.."
+                required
+                maxLength={20}
+                className="p-3 border outline-none rounded-md"
+              />
+            </div>
+          </>
+        ) : null}
 
         <div className="email flex flex-col">
           <input
@@ -70,7 +77,7 @@ const Form = ({ signIn, onFormSubmit }) => {
             ref={emailRef}
             placeholder="Email.."
             required
-            className="p-3 border outline-non rounded-md"
+            className="p-3 border outline-none rounded-md"
           />
         </div>
 
@@ -81,24 +88,36 @@ const Form = ({ signIn, onFormSubmit }) => {
             ref={passwordRef}
             placeholder="Password.."
             required
-            className="p-3 border outline-non rounded-md"
+            className="p-3 border outline-none rounded-md"
           />
         </div>
 
-        <div className="confirm password flex flex-col">
-          <input
-            type="password"
-            name="confirm password"
-            ref={confirmPasswordRef}
-            placeholder="Confirm Password.."
-            required
-            className="p-3 border outline-non rounded-md"
-          />
+        {!signIn ? (
+          <div className="confirm password flex flex-col">
+            <input
+              type="password"
+              name="confirm password"
+              ref={confirmPasswordRef}
+              placeholder="Confirm Password.."
+              required
+              className="p-3 border outline-none rounded-md"
+            />
+          </div>
+        ) : null}
+
+        <div>
+          <span className="text-[#777] px-2">
+            {!signIn ? (
+              <Link href={"/auth/login"}>Already Have Account, Sign In!</Link>
+            ) : (
+              <Link href={"/auth/signup"}>Dont have Account, Sign Up!</Link>
+            )}
+          </span>
         </div>
 
         <div className="submit w-full flex justify-center ">
           <button className={`${styles.button}`} type="submit">
-            Sign Up
+            {!signIn ? "Sign Up" : "Sign In"}
           </button>
         </div>
       </form>

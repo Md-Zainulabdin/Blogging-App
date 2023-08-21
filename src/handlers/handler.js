@@ -46,7 +46,7 @@ export const saveUsers = async ({ firstname, lastname, email, password }) => {
 
 // 5 -> verify user with password
 
-export const verifyPassword = async (password, hashedPassword) => {
+export const verifyPassword = async (hashedPassword, password ) => {
     const isFound = await compare(password, hashedPassword);
     return isFound;
 }
