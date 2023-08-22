@@ -47,7 +47,7 @@ const PostBlog = () => {
   };
 
   return (
-    <div className="w-[70%] p-4 border rounded-md shadow-sm bg-white">
+    <div className="w-[90%] md:w-[70%] p-4 border rounded-md shadow-sm bg-white">
       <div className="w-full flex flex-col gap-5">
         <div className="title">
           <input

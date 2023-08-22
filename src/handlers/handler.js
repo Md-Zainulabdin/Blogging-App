@@ -65,7 +65,7 @@ export const getBlogs = () => {
 export const saveBlogs = ({ fullname, title, desc, date, img }) => {
     const blogs = getBlogs();
     blogs.push({
-        id: blogs.length + 1,
+        id: crypto.randomUUID(),
         fullname,
         title,
         desc,
@@ -74,4 +74,30 @@ export const saveBlogs = ({ fullname, title, desc, date, img }) => {
     });
 
     fs.writeFileSync(blogFilePath, JSON.stringify(blogs))
+}
+
+export const getBlogById = (id) => {
+    const allBlogs = getBlogs();
+    const blogById = allBlogs.find((blog) => blog.id === +id);
+    return blogById;
+}
+
+export const deleteBlog = (id) => {
+    let allBlogs = getBlogs();
+    console.log('Before', allBlogs);
+    let updateBlogs = allBlogs.filter((blog) => blog.id !== id);
+    fs.writeFileSync(blogFilePath, JSON.stringify(updateBlogs))
+}
+
+export const updateBlog = (data, id) => {
+    const allBlogs = getBlogs();
+    const blog = getBlogById(id);
+    const { title, desc, date } = data;
+    const index = +blog.id - 1;
+
+    allBlogs[index].title = title;
+    allBlogs[index].desc = desc;
+    allBlogs[index].date = date;
+
+    fs.writeFileSync(blogFilePath, JSON.stringify(allBlogs))
 }
