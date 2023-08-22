@@ -33,6 +33,7 @@ const PostBlog = () => {
           title,
           desc,
           date,
+          img: `/dummyprofile.jpg`
         }),
       });
 

@@ -62,7 +62,7 @@ export const getBlogs = () => {
 
 // Save Blogs
 
-export const saveBlogs = ({ fullname, title, desc, date }) => {
+export const saveBlogs = ({ fullname, title, desc, date, img }) => {
     const blogs = getBlogs();
     blogs.push({
         id: blogs.length + 1,
@@ -70,6 +70,7 @@ export const saveBlogs = ({ fullname, title, desc, date }) => {
         title,
         desc,
         date,
+        img,
     });
 
     fs.writeFileSync(blogFilePath, JSON.stringify(blogs))

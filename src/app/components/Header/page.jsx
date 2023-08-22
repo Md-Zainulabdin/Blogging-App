@@ -3,7 +3,7 @@ import React from "react";
 
 const Header = ({ value }) => {
   return (
-    <div className="w-full h-[80px] border-b flex items-center">
+    <div className="w-full h-[80px] border-b flex items-center cursor-pointer">
       <div className={`${styles.paddingX}`}>
         <h1 className="text-[26px] font-bold text-[--primary-black]">{value}</h1>
       </div>
