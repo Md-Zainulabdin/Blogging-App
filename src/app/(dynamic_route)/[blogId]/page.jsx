@@ -24,13 +24,16 @@ const UserBlog = ({ params }) => {
           </h1>
         </div>
 
-        <div className="blogs-cards w-full flex">
-          <div className="user-blogs w-[70%] border">
+        <div className="blogs-cards w-full flex flex-col-reverse md:flex-row gap-8">
+          <div className="user-blogs w-full md:w-[80%]">
             <BlogsCards blogs={filteredBlogs}/>
           </div>
-          <div className="user-profile w-[30%] border flex flex-col items-end gap-2">
-            <div className="name text-2xl text-[--primary-color] font-medium">{capitlize(filteredBlogs[0]?.fullname)}</div>
+          <div className="user-profile w-full md:w-[30%] flex flex-col items-end gap-2">
+            <div className="name text-xl sm:text-2xl text-[--primary-color] font-medium">{capitlize(filteredBlogs[0]?.fullname)}</div>
             <div className="email text-[26px] font-medium text-[--primary-black]">{filteredBlogs[0]?.email}</div>
+            <div className="img mt-3">
+              <img src={filteredBlogs[0]?.img} alt="profile pic" className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px]" />
+            </div>
           </div>
         </div>
       </div>

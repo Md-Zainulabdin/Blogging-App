@@ -9,14 +9,16 @@ const AllBlogs = async () => {
   const blogs = getBlogs();
   let edit = false;
   if (session?.user) {
-    edit = true
+    edit = true;
   }
   return (
     <div className="mt-8">
       <h1 className="text-2xl text-[--primary-black] font-semibold mb-8">
         All Blogs
       </h1>
-      <BlogsCards blogs={blogs} edit={edit}/>
+      <div className="w-full sm:w-[80%] md:w-[70%]">
+        <BlogsCards blogs={blogs} edit={edit} />
+      </div>
     </div>
   );
 };

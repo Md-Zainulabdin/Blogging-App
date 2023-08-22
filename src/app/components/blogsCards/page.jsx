@@ -17,8 +17,8 @@ const BlogsCards = ({ blogs, edit }) => {
   };
 
   return (
-    <div className="w-[90%] md:w-[70%] flex flex-col gap-4">
-      {blogs.length !== 0 ? (
+    <div className="w-full flex flex-col gap-4">
+      {blogs?.length !== 0 ? (
         blogs?.map((currElem) => (
           <div
             className="border p-5 bg-white shadow-sm rounded-md cursor-pointer"
