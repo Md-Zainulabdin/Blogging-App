@@ -62,7 +62,7 @@ export const getBlogs = () => {
 
 // Save Blogs
 
-export const saveBlogs = ({ fullname, title, desc, date, img }) => {
+export const saveBlogs = ({ fullname, title, desc, date, img, email }) => {
     const blogs = getBlogs();
     blogs.push({
         id: crypto.randomUUID(),
@@ -71,6 +71,7 @@ export const saveBlogs = ({ fullname, title, desc, date, img }) => {
         desc,
         date,
         img,
+        email
     });
 
     fs.writeFileSync(blogFilePath, JSON.stringify(blogs))

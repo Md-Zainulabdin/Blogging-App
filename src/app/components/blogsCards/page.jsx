@@ -52,7 +52,7 @@ const BlogsCards = ({ blogs, edit }) => {
               {edit ? (
                 <button>Edit</button>
               ) : (
-                <Link href={`/${currElem.fullname}`}>See all from this user</Link>
+                <Link href={`/${currElem.fullname.split(" ").join("")}`}>See all from this user</Link>
               )}
               {edit ? (
                 <button
