@@ -3,6 +3,7 @@ import { dateBuilder } from "@/app/lib/currentDate";
 import { styles } from "@/app/lib/style";
 import { errorMessage } from "@/app/lib/toastMessage";
 import { useSession } from "next-auth/react";
+import { revalidateTag } from "next/cache";
 import React from "react";
 import { useRef } from "react";
 
@@ -41,6 +42,7 @@ const PostBlog = () => {
       if (res.ok) {
         titleRef.current.value = "";
         descRef.current.value = "";
+        window.location.reload()
       }
     } else {
       errorMessage("Only Authenticate User Can Post Blog");

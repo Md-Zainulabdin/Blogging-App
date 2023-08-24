@@ -85,7 +85,6 @@ export const getBlogById = (id) => {
 
 export const deleteBlog = (id) => {
     let allBlogs = getBlogs();
-    console.log('Before', allBlogs);
     let updateBlogs = allBlogs.filter((blog) => blog.id !== id);
     fs.writeFileSync(blogFilePath, JSON.stringify(updateBlogs))
 }

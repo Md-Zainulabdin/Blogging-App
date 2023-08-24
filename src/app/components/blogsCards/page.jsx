@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useSession } from "next-auth/react";
+import { revalidateTag } from "next/cache";
 
 const BlogsCards = ({ blogs, edit }) => {
 
@@ -14,6 +15,8 @@ const BlogsCards = ({ blogs, edit }) => {
     const res = await fetch(`/api/blog/${id}`, {
       method: "DELETE",
     });
+
+    window.location.reload();
   };
 
   return (
@@ -50,7 +53,7 @@ const BlogsCards = ({ blogs, edit }) => {
             </div>
             <div className="row-3 flex gap-3 text-[--primary-color]">
               {edit ? (
-                <button>Edit</button>
+                <Link href={'updateBlog'}>Edit</Link>
               ) : (
                 <Link href={`/${currElem.fullname.split(" ").join("")}`}>See all from this user</Link>
               )}
